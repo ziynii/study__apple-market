@@ -15,7 +15,8 @@ const Register = () => {
         pwRef.current.value
       ) //
       .then((result) => {
-        navigate('/login')
+        result.user.updateProfile({ displayName: nameRef.current.value });
+        navigate('/login');
       });
   };
 
