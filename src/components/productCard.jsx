@@ -6,13 +6,13 @@ const ProductCard = ({ product }) => {
       <div
         className="thumbnail"
         style={{
-          backgroundImage: `url("https://via.placeholder.com/350")`,
+          backgroundImage: `url(${product.image})`,
         }}
       ></div>
       <div className="flex-grow-1 p-4">
-        <h5 className="title">{product.제목}</h5>
-        <p className="date">2030년 1월 8일</p>
-        <p className="price">{product.가격}원</p>
+        <h5 className="title">{product.title}</h5>
+        <p className="date">{product.date}</p>
+        <p className="price">{product.price}원</p>
         <p className="float-end">💗0</p>
       </div>
     </div>

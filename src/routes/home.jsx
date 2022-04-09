@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
+import Layout from '../components/layout';
 import ProductCard from '../components/productCard';
 import { db } from '../firebase';
 import Upload from './upload';
@@ -7,6 +8,7 @@ import Upload from './upload';
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [isUpload, setIsUpload] = useState(false);
+
 
   useEffect(() => {
     db.collection('products')
@@ -23,7 +25,7 @@ const Home = () => {
   }, []);
 
   return (
-    <>
+    <div className="product-list">
       <Container>
         {products?.map((product, i) => {
           return <ProductCard product={product} key={i} />;
@@ -32,8 +34,9 @@ const Home = () => {
       <button className="upload-button" onClick={() => setIsUpload(true)}>
         +
       </button>
-      {isUpload ? <Upload /> : null}
-    </>
+      {isUpload ? <Upload setIsUpload={setIsUpload} /> : null}
+      {isUpload ? <Layout /> : null}
+    </div>
   );
 };
 
