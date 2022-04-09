@@ -35,7 +35,7 @@ const Home = () => {
         +
       </button>
       {isUpload ? <Upload setIsUpload={setIsUpload} /> : null}
-      {isUpload ? <Layout /> : null}
+      {isUpload ? <Layout setIsUpload={setIsUpload} /> : null}
     </div>
   );
 };
