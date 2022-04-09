@@ -15,6 +15,10 @@ const Login = () => {
     navigate('/');
   };
 
+  const handleLogout = () => {
+    auth.signOut();
+  };
+
   return (
     <div className="container login">
       <div className="mb-3">
@@ -37,6 +41,9 @@ const Login = () => {
       </div>
       <button type="submit" className="btn btn-primary" onClick={handleLogin}>
         로그인
+      </button>
+      <button type="submit" className="btn btn-primary" onClick={handleLogout}>
+        로그아웃
       </button>
     </div>
   );
