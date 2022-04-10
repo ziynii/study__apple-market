@@ -10,6 +10,7 @@ import Register from './routes/register.jsx';
 import Detail from './routes/detail.jsx';
 import { auth } from './firebase.js';
 import { useEffect, useState } from 'react';
+import Edit from './routes/edit.jsx';
 
 function App() {
   const [username, setUsername] = useState();
@@ -39,6 +40,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/detail/:id" element={<Detail />} />
+          <Route path="/edit/:id" element={<Edit />} />
         </Routes>
       </BrowserRouter>
     </div>

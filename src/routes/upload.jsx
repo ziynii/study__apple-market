@@ -49,7 +49,7 @@ const Upload = ({ setIsUpload }) => {
         });
       }
     );
-    // setIsUpload(false);
+    setIsUpload(false);
   };
 
   const handleTextarea = (event) => {
