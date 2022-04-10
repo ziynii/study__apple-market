@@ -15,21 +15,25 @@ const Home = () => {
       .get() //
       .then((result) => {
         let productsArray = [];
+        let docsArray = [];
 
         result.forEach((doc) => {
           productsArray.push(doc.data());
-          setIsDoc(doc);
+          docsArray.push(doc);
         });
 
         setProducts(productsArray);
+        setIsDoc(docsArray);
       });
   }, []);
+
+  console.log(isDoc);
 
   return (
     <div className="product-list">
       <Container>
         {products?.map((product, i) => {
-          return <ProductCard product={product} key={i} isDoc={isDoc}/>;
+          return <ProductCard product={product} key={i} doc={isDoc[i]} />;
         })}
       </Container>
       <button className="upload-button" onClick={() => setIsUpload(true)}>

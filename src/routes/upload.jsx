@@ -2,12 +2,16 @@ import React, { useRef, useState } from 'react';
 import { db, storage } from '../firebase';
 
 const Upload = ({ setIsUpload }) => {
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
+
   const titleRef = useRef();
   const contentRef = useRef();
   const priceRef = useRef();
   const date = new Date(+new Date() + 3240 * 10000).toISOString().split('T')[0];
   const [textareaValue, setTextareaValue] =
     useState('상품 설명을 입력해주세요');
+
+  console.log(user);
 
   const onSubmit = () => {
     const file = document.querySelector('#image').files[0];
@@ -33,6 +37,8 @@ const Upload = ({ setIsUpload }) => {
               content: contentRef.current.value,
               date: date,
               image: url,
+              uid: user.uid,
+              username: user.displayName,
             })
             .then((result) => {
               console.log(result);
@@ -43,8 +49,7 @@ const Upload = ({ setIsUpload }) => {
         });
       }
     );
-
-    setIsUpload(false);
+    // setIsUpload(false);
   };
 
   const handleTextarea = (event) => {

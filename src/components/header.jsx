@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { auth } from '../firebase';
 
-const Header = () => {
+const Header = ({ username }) => {
   return (
     <Navbar bg="light" expand="lg">
       <Container>
         <Navbar.Brand href="/">APPLE MARKET</Navbar.Brand>
+        <span className="user-name">
+          {username != undefined ? username + '님' : ''}
+        </span>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">

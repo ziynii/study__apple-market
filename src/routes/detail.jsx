@@ -20,12 +20,12 @@ const Detail = () => {
   console.log(docId.id);
   return (
     <div className="container detail">
-      <h2 className="detail-title">상세페이지</h2>
+      <h2 className="detail-title">{product?.title}</h2>
       <div
         className="detail-pic my-4"
         style={{ backgroundImage: `url(${product?.image})` }}
       ></div>
-      <h5 className="author">올린사람</h5>
+      <h5 className="author">{product?.username}</h5>
       <p className="date">{product?.date}</p>
       <p className="price">{product?.price}</p>
       <p className="content">{product?.content}</p>
