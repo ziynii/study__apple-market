@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, isDoc }) => {
   return (
     <div className="product">
       <div
@@ -10,7 +11,9 @@ const ProductCard = ({ product }) => {
         }}
       ></div>
       <div className="flex-grow-1 p-4">
-        <h5 className="title">{product.title}</h5>
+        <Link to={`/detail/${isDoc.id}`}>
+          <h5 className="title">{product.title}</h5>{' '}
+        </Link>
         <p className="date">{product.date}</p>
         <p className="price">{product.price}원</p>
         <p className="float-end">💗0</p>

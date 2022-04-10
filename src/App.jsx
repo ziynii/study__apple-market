@@ -7,6 +7,7 @@ import './styles/main.css';
 import Upload from './routes/upload.jsx';
 import Login from './routes/login.jsx';
 import Register from './routes/register.jsx';
+import Detail from './routes/detail.jsx';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/upload" element={<Upload />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/detail/:id" element={<Detail />} />
         </Routes>
       </BrowserRouter>
     </div>

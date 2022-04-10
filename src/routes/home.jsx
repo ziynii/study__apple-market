@@ -8,7 +8,7 @@ import Upload from './upload';
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [isUpload, setIsUpload] = useState(false);
-
+  const [isDoc, setIsDoc] = useState({});
 
   useEffect(() => {
     db.collection('products')
@@ -18,6 +18,7 @@ const Home = () => {
 
         result.forEach((doc) => {
           productsArray.push(doc.data());
+          setIsDoc(doc);
         });
 
         setProducts(productsArray);
@@ -28,7 +29,7 @@ const Home = () => {
     <div className="product-list">
       <Container>
         {products?.map((product, i) => {
-          return <ProductCard product={product} key={i} />;
+          return <ProductCard product={product} key={i} isDoc={isDoc}/>;
         })}
       </Container>
       <button className="upload-button" onClick={() => setIsUpload(true)}>
