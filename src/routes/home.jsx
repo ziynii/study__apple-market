@@ -27,8 +27,6 @@ const Home = () => {
       });
   }, []);
 
-  console.log(isDoc);
-
   return (
     <div className="product-list">
       <Container>

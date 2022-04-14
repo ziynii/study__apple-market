@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import ChatItem from '../components/chatItem';
 import { db } from '../firebase';
 
 const Chat = () => {
   const userId = useParams();
+  const [messageValue, setMessageValue] = useState('');
   const [chatroomList, setChatroomList] = useState([]);
+  const [messageList, setMessageList] = useState([]);
+  const [docId, setDocId] = useState();
   let chatroomArray = [];
+  let messageArray = [];
 
   console.log(userId.id);
 
@@ -15,12 +20,42 @@ const Chat = () => {
       .get()
       .then((result) => {
         result.forEach((doc) => {
-          console.log(doc.data());
           chatroomArray.push(doc.data());
+          setDocId(doc.id);
         });
         setChatroomList(chatroomArray);
       });
   }, []);
+
+  const onChangeInput = (e) => {
+    setMessageValue(e.target.value);
+  };
+
+  const sendMessage = () => {
+    db.collection('chatroom')
+      .doc(docId)
+      .collection('messages')
+      .add({
+        content: messageValue,
+        date: new Date(+new Date() + 3240 * 10000).toISOString().split('T')[0],
+        uid: userId.id,
+      });
+  };
+
+  useEffect(() => {
+    db.collection('chatroom')
+      .doc(docId)
+      .collection('messages')
+      .get()
+      .then((result) => {
+        result.forEach((message) => {
+          messageArray.push(message.data());
+        });
+        setMessageList(messageArray);
+      });
+  }, [docId]);
+
+  console.log(messageList);
 
   return (
     <div className="container chatpage p-4">
@@ -29,10 +64,7 @@ const Chat = () => {
           <ul className="list-group chat-list">
             {chatroomList.map((chatroom, i) => {
               return (
-                <li className="list-group-item" key={i}>
-                  <h6 className="chat-room-title">{chatroom.product}</h6>
-                  <h6 className="text-small">{chatroom.date}</h6>
-                </li>
+                <ChatItem chatroom={chatroom} key={i} setDocId={setDocId} />
               );
             })}
           </ul>
@@ -41,20 +73,24 @@ const Chat = () => {
         <div className="col-9 p-0">
           <div className="chat-room">
             <ul className="list-group chat-content">
-              <li>
-                <span className="chat-box">채팅방 1 내용</span>
-              </li>
-              <li>
-                <span className="chat-box">채팅방 1 내용</span>
-              </li>
-              <li>
-                <span className="chat-box mine">채팅방 1 내용</span>
-              </li>
+              {messageList.map((message, i) => {
+								console.log(message);
+                <li key={i}>
+                  <span className="chat-box">{message.content}</span>
+                </li>;
+              })}
             </ul>
 
             <div className="input-group">
-              <input type="text" className="form-control" />
-              <button className="btn btn-secondary">전송</button>
+              <input
+                type="text"
+                className="form-control"
+                value={messageValue}
+                onChange={onChangeInput}
+              />
+              <button className="btn btn-secondary" onClick={sendMessage}>
+                전송
+              </button>
             </div>
           </div>
         </div>

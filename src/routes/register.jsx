@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../firebase';
+import { auth, db } from '../firebase';
 
 const Register = () => {
   const nameRef = useRef();
@@ -15,6 +15,11 @@ const Register = () => {
         pwRef.current.value
       ) //
       .then((result) => {
+        db.collection('user').doc(result.user.uid).set({
+          name: nameRef.current.value,
+          email: emailRef.current.value
+        });
+				
         result.user.updateProfile({ displayName: nameRef.current.value });
         navigate('/login');
       });

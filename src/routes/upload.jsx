@@ -11,8 +11,6 @@ const Upload = ({ setIsUpload }) => {
   const [textareaValue, setTextareaValue] =
     useState('상품 설명을 입력해주세요');
 
-  console.log(user);
-
   const onSubmit = () => {
     const file = document.querySelector('#image').files[0];
     const storageRef = storage.ref();
@@ -49,7 +47,7 @@ const Upload = ({ setIsUpload }) => {
         });
       }
     );
-    setIsUpload(false);
+    // setIsUpload(false);
   };
 
   const handleTextarea = (event) => {

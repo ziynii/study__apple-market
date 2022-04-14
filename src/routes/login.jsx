@@ -12,6 +12,7 @@ const Login = () => {
       emailRef.current.value,
       pwRef.current.value
     );
+
     navigate('/');
   };
 

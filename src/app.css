@@ -1,0 +1,9 @@
+.margin-wrapper {
+  position: relative;
+  margin: 0 auto;
+  background-color: white;
+}
+
+body {
+  background-color: lightcoral;
+}

@@ -4,7 +4,7 @@ import { db, storage } from '../firebase';
 
 const Edit = () => {
   const docId = useParams();
-	const navigate = useNavigate();
+  const navigate = useNavigate();
   const [product, setProduct] = useState();
 
   const [textareaValue, setTextareaValue] = useState('');
@@ -19,8 +19,6 @@ const Edit = () => {
         setProduct(result.data());
       });
   }, []);
-
-	console.log(product);
 
   useEffect(() => {
     if (product) {
@@ -48,7 +46,7 @@ const Edit = () => {
       price: priceValue,
       content: textareaValue,
     });
-		navigate('/')
+    navigate('/');
   };
 
   return (
